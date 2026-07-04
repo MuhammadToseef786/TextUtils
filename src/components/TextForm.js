@@ -16,6 +16,14 @@ export default function TextForm(props) {
         props.showAlert("Converted to lowercase!", "success")
     }
 
+    const handleCapitalize = () => {
+        let newText = text.toLowerCase().replace(
+            /(^|[.!?]\s+|\n\s*)([a-z])/g, 
+            (match, p1, p2) => p1 + p2.toUpperCase());
+        setText(newText);
+        props.showAlert("Text Capitalized!", "success")
+    }
+
     const handleExtraSpaces = () => {
         let newText = text.split(/[ ]+/)
         setText(newText.join(" "));
@@ -49,6 +57,7 @@ export default function TextForm(props) {
                 </div>
                 <button disabled={text.length===0} className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button> 
                 <button disabled={text.length===0} className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to Lowercase</button>
+                <button disabled={text.length===0} className="btn btn-primary mx-1" onClick={handleCapitalize}>Capitalize Text</button>
                 <button disabled={text.length===0} className="btn btn-primary mx-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
                 <button disabled={text.length===0} className="btn btn-primary mx-1" onClick={handleCopyText}>Copy Text</button>
                 <button disabled={text.length===0} className="btn btn-primary mx-1" onClick={handleClearText}>Clear Text</button>
